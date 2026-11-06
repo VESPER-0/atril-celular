@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#001F30" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; connect-src 'self' ws:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Atril</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="iconos/icono-192.png" />
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Atril</h1>
+      <p class="subtitulo">Prueba de la app instalable</p>
+
+      <section class="pasos" aria-label="Resultado de la prueba">
+        <p id="paso-instalada" class="paso"></p>
+        <p id="paso-qr" class="paso"></p>
+        <p id="paso-conexion" class="paso"></p>
+      </section>
+
+      <button id="instalar" class="principal" hidden>Instalar Atril</button>
+      <p id="ayuda-instalar" class="ayuda" hidden>Abre el menú ⋮ de Chrome y elige <strong>Instalar app</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
+
+      <button id="escanear" class="principal">Escanear código QR</button>
+      <div id="camara" class="camara" hidden>
+        <video id="video" playsinline muted></video>
+        <button id="cancelar">Cancelar</button>
+      </div>
+
+      <details>
+        <summary>Escribir la dirección a mano</summary>
+        <form id="manual">
+          <input id="direccion" type="url" autocomplete="off" spellcheck="false" placeholder="http://192.168.1.10:47800/…/" aria-label="Dirección de Atril" />
+          <button type="submit">Conectar</button>
+        </form>
+      </details>
+
+      <p id="mensaje" class="mensaje" role="status"></p>
+
+      <section id="control" class="control" hidden>
+        <p id="posicion" class="posicion"></p>
+        <p id="texto" class="texto"></p>
+        <div class="navegacion">
+          <button id="anterior" aria-label="Diapositiva anterior">←</button>
+          <button id="siguiente" class="principal">Siguiente →</button>
+        </div>
+      </section>
+
+      <p id="detalles" class="detalles"></p>
+    </main>
+    <script type="module" src="prueba.js"></script>
+  </body>
+</html>

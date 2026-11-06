@@ -1,0 +1,165 @@
+:root {
+  --azul-noche: #001f30;
+  --azul-petroleo: #0d2d3a;
+  --azul-acero: #105561;
+  --cian-intenso: #18d8de;
+  --cian-hielo: #d9fdfd;
+  --coral: #f4978e;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--azul-noche);
+  color: var(--cian-hielo);
+  font-family: system-ui, Roboto, sans-serif;
+  font-size: 17px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.subtitulo,
+.ayuda,
+.detalles {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.detalles {
+  overflow-wrap: anywhere;
+}
+
+button,
+input {
+  min-height: 52px;
+  border: 1px solid var(--azul-acero);
+  border-radius: 10px;
+  background: var(--azul-petroleo);
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  padding: 0 16px;
+  font-weight: 600;
+  touch-action: manipulation;
+}
+
+button.principal {
+  border: 0;
+  background: var(--cian-intenso);
+  color: var(--azul-noche);
+}
+
+.pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--azul-acero);
+  border-radius: 10px;
+}
+
+.paso.bien {
+  color: var(--cian-intenso);
+  font-weight: 600;
+}
+
+.paso.mal {
+  color: var(--coral);
+  font-weight: 600;
+}
+
+.camara {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+video {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 3px solid var(--cian-intenso);
+  border-radius: 10px;
+  background: #000;
+  object-fit: cover;
+}
+
+summary {
+  padding: 8px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 0 12px;
+}
+
+.mensaje {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.posicion {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.texto {
+  max-height: 30vh;
+  padding: 12px;
+  overflow-y: auto;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.navegacion {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 8px;
+}
+
+.navegacion button {
+  min-height: 76px;
+  font-size: 22px;
+}
