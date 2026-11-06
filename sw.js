@@ -1,5 +1,5 @@
 // Guarda la app en el celular para que abra sin internet.
-const VERSION = 'atril-prueba-1';
+const VERSION = 'atril-prueba-2';
 const ARCHIVOS = ['./', 'index.html', 'estilo.css', 'prueba.js', 'manifest.webmanifest', 'iconos/icono-192.png', 'iconos/icono-512.png'];
 
 self.addEventListener('install', (evento) => {

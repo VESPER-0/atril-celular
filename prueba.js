@@ -130,7 +130,7 @@ let estado = null;
 async function pintarDetalles(extra = '') {
   let permiso = 'sin dato';
   try {
-    permiso = (await navigator.permissions.query({ name: 'local-network-access' })).state;
+    permiso = (await navigator.permissions.query({ name: 'local-network' })).state;
   } catch {
     // Este navegador no informa ese permiso.
   }
@@ -205,7 +205,7 @@ function conectar(direccion) {
     conectada = false;
     pintarControl();
     marcar(el['paso-conexion'], estabaConectada ? 'Se perdió la conexión con la laptop' : 'No se pudo conectar con la laptop', 'mal');
-    decir(estabaConectada ? 'Vuelve a escanear el código.' : 'Revisa que la laptop esté en el hotspot y que Atril muestre el código. Si Atril es de una versión anterior, actualízalo.');
+    decir(estabaConectada ? 'Vuelve a escanear el código.' : 'Revisa que la laptop esté en el hotspot y que Atril 1.4.0 muestre el código. Si tocaste Bloquear, cambia el permiso de red local en los ajustes de la app.');
     pintarDetalles(`código ${evento.code}`);
   });
 }
