@@ -2,59 +2,110 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#001F30" />
-    <meta name="referrer" content="no-referrer" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:; connect-src 'self' ws:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'"
-    />
     <title>Atril</title>
+    <link rel="icon" href="icono.ico" />
+    <link rel="stylesheet" href="celular.css" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' data: blob:; connect-src 'self' ws:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'" />
+    <meta name="referrer" content="no-referrer" />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="icon" href="iconos/icono-192.png" />
-    <link rel="stylesheet" href="estilo.css" />
   </head>
   <body>
-    <main>
+    <div id="inicio" class="centro">
       <h1>Atril</h1>
-      <p class="subtitulo">Prueba de la app instalable</p>
-
-      <section class="pasos" aria-label="Resultado de la prueba">
-        <p id="paso-instalada" class="paso"></p>
-        <p id="paso-qr" class="paso"></p>
-        <p id="paso-conexion" class="paso"></p>
-      </section>
-
+      <p id="inicio-texto">Toca para usar este celular como prompter y control.</p>
+      <button id="empezar" class="principal">Empezar</button>
       <button id="instalar" class="principal" hidden>Instalar Atril</button>
-      <p id="ayuda-instalar" class="ayuda" hidden>Abre el menú ⋮ de Chrome y elige <strong>Instalar app</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
-
-      <button id="escanear" class="principal">Escanear código QR</button>
+      <p id="ayuda-instalar" class="tenue" hidden>Para instalarla, abre el menú ⋮ de Chrome y elige <strong>Instalar app</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
+      <button id="escanear" class="principal" hidden>Escanear código QR</button>
       <div id="camara" class="camara" hidden>
         <video id="video" playsinline muted></video>
-        <button id="cancelar">Cancelar</button>
+        <button id="cancelar-camara">Cancelar</button>
       </div>
-
-      <details>
+      <details id="manual-opcion" hidden>
         <summary>Escribir la dirección a mano</summary>
         <form id="manual">
           <input id="direccion" type="url" autocomplete="off" spellcheck="false" placeholder="http://192.168.1.10:47800/…/" aria-label="Dirección de Atril" />
           <button type="submit">Conectar</button>
         </form>
       </details>
-
       <p id="mensaje" class="mensaje" role="status"></p>
+    </div>
 
-      <section id="control" class="control" hidden>
-        <p id="posicion" class="posicion"></p>
-        <p id="texto" class="texto"></p>
-        <div class="navegacion">
-          <button id="anterior" aria-label="Diapositiva anterior">←</button>
-          <button id="siguiente" class="principal">Siguiente →</button>
+    <div id="espera" class="centro" hidden>
+      <h1>Atril</h1>
+      <p>Conectado. Esperando la presentación.</p>
+      <p class="tenue">En la laptop, haz clic en <strong>Presentar</strong>.</p>
+    </div>
+
+    <div id="presentacion" class="presentacion" hidden>
+      <header class="datos">
+        <span id="posicion" class="posicion"></span>
+        <button id="cronometro" class="cronometro" aria-label="Pausar o reanudar el cronómetro"></button>
+      </header>
+
+      <section id="panel" class="panel">
+        <p id="expositor" class="expositor" hidden></p>
+        <div id="texto" class="texto"></div>
+      </section>
+
+      <section class="contexto">
+        <img id="miniatura" class="miniatura" alt="Diapositiva actual" />
+        <div class="contexto-texto">
+          <p id="aviso-negro" class="aviso-negro" hidden>Pantalla negra</p>
+          <p id="sigue" class="sigue"></p>
         </div>
       </section>
 
-      <p id="detalles" class="detalles"></p>
-    </main>
-    <script type="module" src="prueba.js"></script>
+      <div class="herramientas">
+        <button id="abrir-zoom">Zoom</button>
+        <button id="abrir-lista">Diapositivas</button>
+        <button id="negro">Pantalla negra</button>
+        <button id="letra-menos" aria-label="Letra más chica">A−</button>
+        <button id="letra-mas" aria-label="Letra más grande">A+</button>
+        <button id="contraste" aria-label="Cambiar contraste">Contraste</button>
+      </div>
+
+      <nav class="navegacion">
+        <button id="anterior" aria-label="Diapositiva anterior">←</button>
+        <button id="siguiente" class="principal">Siguiente →</button>
+      </nav>
+    </div>
+
+    <div id="vista-zoom" class="vista-zoom" hidden>
+      <header class="zoom-cabecera">
+        <strong id="zoom-nivel"></strong>
+        <span>Se ve igual en el proyector</span>
+      </header>
+      <div id="zoom-zona" class="zoom-zona">
+        <div id="zoom-area" class="zoom-area">
+          <img id="zoom-imagen" alt="Diapositiva" draggable="false" />
+        </div>
+      </div>
+      <p class="zoom-ayuda">Dos dedos: acercar. Un dedo: mover. Dos toques: acercar o restablecer.</p>
+      <div class="zoom-botones">
+        <button id="zoom-menos" aria-label="Alejar">−</button>
+        <button id="zoom-mas" aria-label="Acercar">+</button>
+        <button id="zoom-reiniciar">Restablecer</button>
+      </div>
+      <button id="zoom-cerrar" class="principal">Volver al prompter</button>
+    </div>
+
+    <div id="vista-lista" class="vista-lista" hidden>
+      <header class="lista-cabecera">
+        <strong>Ir a una diapositiva</strong>
+        <button id="lista-cerrar">Cerrar</button>
+      </header>
+      <div id="lista" class="lista"></div>
+    </div>
+
+    <div id="sin-conexion" class="sin-conexion" role="status" hidden>
+      <span>Sin conexión con la laptop. Reconectando…</span>
+      <button id="escanear-otra-vez" hidden>Escanear</button>
+    </div>
+
+    <script src="nosleep.js"></script>
+    <script type="module" src="celular.js"></script>
   </body>
 </html>

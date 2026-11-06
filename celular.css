@@ -1,0 +1,550 @@
+/* Misma paleta de Atril. Los botones son grandes para usarlos sin mirar. */
+:root {
+  --azul-noche: #001f30;
+  --azul-petroleo: #0d2d3a;
+  --azul-acero: #105561;
+  --cian-medio: #17c1ca;
+  --cian-intenso: #18d8de;
+  --cian-claro: #61daf8;
+  --cian-hielo: #d9fdfd;
+  --coral: #f4978e;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--azul-noche);
+  color: var(--cian-hielo);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+}
+
+button {
+  border: 1px solid var(--azul-acero);
+  border-radius: 10px;
+  background: var(--azul-petroleo);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+button:active {
+  background: var(--azul-acero);
+}
+
+button:disabled {
+  opacity: 0.35;
+}
+
+button.principal {
+  border: 0;
+  background: var(--cian-intenso);
+  color: var(--azul-noche);
+}
+
+button.principal:active {
+  background: var(--cian-claro);
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+.centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  padding: 24px;
+  overflow-y: auto;
+  text-align: center;
+  font-size: 20px;
+}
+
+.centro h1 {
+  font-size: 36px;
+}
+
+.centro .principal {
+  width: min(320px, 100%);
+  min-height: 72px;
+  font-size: 22px;
+}
+
+.centro > * {
+  flex: none;
+}
+
+.camara,
+#manual-opcion,
+#manual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(320px, 100%);
+}
+
+#manual-opcion {
+  display: block;
+  font-size: 16px;
+}
+
+.camara video {
+  width: 100%;
+  max-height: 50dvh;
+  aspect-ratio: 1;
+  border: 3px solid var(--cian-intenso);
+  border-radius: 10px;
+  background: #000;
+  object-fit: cover;
+}
+
+.camara button,
+#manual button,
+#manual input {
+  min-height: 52px;
+  border-radius: 10px;
+}
+
+#manual input {
+  width: 100%;
+  padding: 0 12px;
+  border: 1px solid var(--azul-acero);
+  background: var(--azul-petroleo);
+  color: inherit;
+  font: inherit;
+}
+
+summary {
+  padding: 8px 0;
+}
+
+.mensaje {
+  min-height: 24px;
+  color: var(--coral);
+  font-size: 16px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tenue {
+  font-size: 17px;
+  opacity: 0.8;
+}
+
+.presentacion {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100dvh;
+  padding: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+}
+
+.datos {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.posicion {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.cronometro {
+  min-width: 96px;
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cronometro.en-pausa {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+/* El marco toma el color de quien expone. */
+.panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 12px;
+  border: 6px solid transparent;
+  border-radius: 12px;
+  background: var(--fondo-prompter);
+}
+
+.panel.con-expositor {
+  border-color: var(--color-expositor);
+}
+
+.panel[data-contraste='negro'] {
+  --fondo-prompter: #000000;
+  --texto-prompter: #ffffff;
+}
+
+.panel[data-contraste='blanco'] {
+  --fondo-prompter: #ffffff;
+  --texto-prompter: #000000;
+}
+
+.panel[data-contraste='azul'] {
+  --fondo-prompter: var(--azul-noche);
+  --texto-prompter: var(--cian-hielo);
+}
+
+.expositor {
+  flex: none;
+  align-self: flex-start;
+  margin-bottom: 8px;
+  padding: 2px 12px;
+  border-radius: 8px;
+  background: var(--color-expositor);
+  color: var(--azul-noche);
+  font-size: 22px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.texto {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--texto-prompter);
+  font-size: var(--tamano-prompter, 34px);
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.texto.sin-texto {
+  opacity: 0.55;
+}
+
+.contexto {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.miniatura {
+  flex: none;
+  width: 96px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--cian-medio);
+  border-radius: 6px;
+  background: #000;
+  object-fit: contain;
+}
+
+.contexto-texto {
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.sigue.cambia {
+  color: var(--color-expositor);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.aviso-negro {
+  color: var(--coral);
+  font-weight: 800;
+}
+
+.herramientas {
+  display: grid;
+  flex: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.herramientas button {
+  min-height: 42px;
+  padding: 0 2px;
+  font-size: 15px;
+}
+
+#abrir-zoom.activo {
+  border-color: var(--cian-intenso);
+  color: var(--cian-intenso);
+}
+
+#negro.activo {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: var(--azul-noche);
+}
+
+.navegacion {
+  display: grid;
+  flex: none;
+  grid-template-columns: 1fr 3fr;
+  gap: 8px;
+}
+
+.navegacion button {
+  min-height: 84px;
+  font-size: 24px;
+}
+
+.sin-conexion button {
+  min-height: 40px;
+  margin-left: 10px;
+  padding: 0 12px;
+  border-color: var(--azul-noche);
+  background: var(--azul-noche);
+  color: var(--cian-hielo);
+}
+
+.sin-conexion {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background: var(--coral);
+  color: var(--azul-noche);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Zoom: el recuadro tiene la forma de la diapositiva, así se ve lo mismo que en el proyector. */
+.vista-zoom,
+.vista-lista {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+  background: var(--azul-noche);
+}
+
+.zoom-cabecera,
+.lista-cabecera {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  font-size: 15px;
+}
+
+.zoom-cabecera strong,
+.lista-cabecera strong {
+  font-size: 20px;
+}
+
+.zoom-zona {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  touch-action: none;
+}
+
+/* El borde separa la diapositiva del fondo, aunque ella use el mismo color que la app. */
+.zoom-area {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  outline: 3px solid var(--cian-intenso);
+}
+
+#zoom-imagen {
+  position: absolute;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.zoom-ayuda {
+  flex: none;
+  font-size: 14px;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.zoom-botones {
+  display: grid;
+  flex: none;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 6px;
+}
+
+.zoom-botones button {
+  min-height: 56px;
+  font-size: 20px;
+}
+
+#zoom-cerrar {
+  flex: none;
+  min-height: 64px;
+  font-size: 20px;
+}
+
+/* Lista de diapositivas */
+#lista-cerrar {
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+.lista {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: min-content;
+  gap: 8px;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.elemento-lista {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  border: 3px solid var(--color-expositor, var(--azul-acero));
+  text-align: left;
+}
+
+.elemento-lista.actual {
+  background: var(--azul-acero);
+  outline: 3px solid var(--cian-hielo);
+  outline-offset: -1px;
+}
+
+.elemento-lista img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  background: #000;
+  object-fit: contain;
+}
+
+.elemento-lista span {
+  padding: 4px 2px 2px;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* Celular de lado: el texto a la izquierda y los controles a la derecha. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .presentacion {
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-columns: 1fr 300px;
+    grid-template-areas:
+      'panel datos'
+      'panel contexto'
+      'panel herramientas'
+      'panel navegacion';
+  }
+
+  .panel {
+    grid-area: panel;
+  }
+
+  .datos {
+    grid-area: datos;
+  }
+
+  .contexto {
+    grid-area: contexto;
+  }
+
+  .herramientas {
+    grid-area: herramientas;
+  }
+
+  .herramientas button {
+    min-height: 36px;
+  }
+
+  .navegacion {
+    grid-area: navegacion;
+  }
+
+  .navegacion button {
+    min-height: 56px;
+  }
+
+  /* El zoom aprovecha lo ancho: la diapositiva a la izquierda y los controles a la derecha. */
+  .vista-zoom {
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr 210px;
+    grid-template-areas:
+      'zona cabecera'
+      'zona ayuda'
+      'zona botones'
+      'zona cerrar';
+  }
+
+  .zoom-zona {
+    grid-area: zona;
+  }
+
+  .zoom-cabecera {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    grid-area: cabecera;
+  }
+
+  .zoom-ayuda {
+    grid-area: ayuda;
+    text-align: left;
+  }
+
+  .zoom-botones {
+    grid-area: botones;
+  }
+
+  #zoom-cerrar {
+    grid-area: cerrar;
+    min-height: 52px;
+    font-size: 17px;
+  }
+
+  .zoom-botones button {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .lista {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
