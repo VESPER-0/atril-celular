@@ -467,7 +467,7 @@ function pintarBotones() {
 
 function pintar() {
   el.inicio.hidden = empezado;
-  el.empezar.hidden = ES_APP && !conectado;
+  el.empezar.hidden = ES_APP && !direccionMensajes;
   el.escanearOtraVez.hidden = !ES_APP;
   el.espera.hidden = !empezado || Boolean(proyecto && estado);
   el.presentacion.hidden = !empezado || !(proyecto && estado);
@@ -568,7 +568,7 @@ function conectar() {
     conexion = null;
     conectado = false;
     cancelarPedidos();
-    if (entrarAlConectar) decir('No se pudo conectar. Revisa que la laptop esté en el hotspot y que Atril muestre el código.');
+    if (entrarAlConectar) decir('No se pudo conectar. Revisa que la laptop esté en el hotspot. Si cerraste Atril o apagaste la conexión, escanea el código otra vez.');
     pintar();
     setTimeout(conectar, REINTENTO_MS);
   });
@@ -597,7 +597,16 @@ function empezar() {
   pintar();
 }
 
-el.empezar.addEventListener('click', empezar);
+// La app instalada no se conecta sola al abrir: Chrome muestra su barra en cuanto hay conexión local
+// y solo deja ocultarla con un toque. Así, el mismo toque conecta y entra a pantalla completa.
+el.empezar.addEventListener('click', () => {
+  if (!ES_APP) {
+    empezar();
+    return;
+  }
+  pedirPantallaCompleta();
+  usarDireccion(direccionMensajes);
+});
 
 // Windows o Android pueden sacar la app de pantalla completa; el siguiente toque la regresa.
 document.addEventListener('click', () => {
@@ -669,7 +678,10 @@ function decir(texto) {
 const estaInstalada = () => window.matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches;
 
 function pintarInicioDeApp() {
-  el.inicioTexto.textContent = 'Escanea el código que muestra Atril en la laptop.';
+  el.inicioTexto.textContent = direccionMensajes
+    ? 'Toca Continuar si Atril sigue abierto en la laptop. Si no, escanea el código.'
+    : 'Escanea el código que muestra Atril en la laptop.';
+  el.empezar.textContent = 'Continuar';
   el.escanear.hidden = !el.camara.hidden;
   el.manualOpcion.hidden = false;
   el.instalar.hidden = estaInstalada() || !avisoInstalar;
@@ -788,4 +800,4 @@ if (ES_APP) {
 
 aplicarAjustes();
 pintar();
-conectar();
+if (!ES_APP) conectar();

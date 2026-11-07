@@ -1,5 +1,5 @@
 // Guarda la app en el celular para que abra sin internet.
-const VERSION = 'atril-1.5.0';
+const VERSION = 'atril-1.7.0';
 const ARCHIVOS = ['./', 'index.html', 'celular.css', 'celular.js', 'zoom.js', 'nosleep.js', 'icono.ico', 'manifest.webmanifest', 'iconos/icono-192.png', 'iconos/icono-512.png'];
 
 self.addEventListener('install', (evento) => {
